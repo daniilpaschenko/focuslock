@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
     // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -56,21 +59,6 @@ dependencies {
     // DI (Hilt)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-
-    // Room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
-
-    // WorkManager
-    implementation(libs.work.runtime.ktx)
-
-    // Retrofit + OkHttp + Serialization
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.kotlinx.serialization)
-    implementation(libs.okhttp.core)
-    implementation(libs.okhttp.logging)
-    implementation(libs.kotlinx.serialization.json)
 
     // Testing
     testImplementation(libs.junit)

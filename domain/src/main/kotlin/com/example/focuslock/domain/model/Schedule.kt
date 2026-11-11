@@ -13,6 +13,6 @@ data class Schedule(
     val startTime: LocalTime,
     val durationMinutes: Int,
     val daysOfWeek: List<DayOfWeek>,
-    val blockedApps: List<BlockedApp> = emptyList(),
+    val blockedApps: List<App> = emptyList(),
     val isEnabled: Boolean = true,
 )

@@ -17,7 +17,7 @@ data class FocusSession(
     val startedAt: Instant,
     val plannedDurationMinutes: Int,
     val endedAt: Instant? = null,
-    val blockedApps: List<BlockedApp> = emptyList(),
+    val blockedApps: List<App> = emptyList(),
     val status: FocusSessionStatus = FocusSessionStatus.ACTIVE,
 ) {
     val isOngoing: Boolean

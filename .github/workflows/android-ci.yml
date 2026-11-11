@@ -28,7 +28,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest testReleaseUnitTest
+        run: ./gradlew test
 
       - name: Run Lint
         run: ./gradlew lint

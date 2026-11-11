@@ -1,9 +1,9 @@
 package com.example.focuslock.domain.model
 
 /**
- * Describes an application that should be blocked during a focus session.
+ * Describes an application
  */
-data class BlockedApp(
+data class App(
     val packageName: String,
     val appName: String,
 )

@@ -1,11 +1,11 @@
-package com.example.focuslock.domain
+package com.example.focuslock.domain.model
 
 import java.time.DayOfWeek
 import java.time.LocalTime
 
 /**
  * Recurring focus plan: at what time and how long to focus,
- * which apps to block and on which days of the week it repeats
+ * which apps to block and on which days of the week it repeats.
  */
 data class Schedule(
     val id: String,

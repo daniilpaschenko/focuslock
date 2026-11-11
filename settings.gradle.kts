@@ -24,3 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "focuslock"
 include(":app")
+include(":domain")
+include(":data")

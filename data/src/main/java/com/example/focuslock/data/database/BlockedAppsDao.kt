@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Access to the `blocked_apps` table
@@ -12,11 +13,14 @@ import androidx.room.Query
 interface BlockedAppsDao {
 
     @Query("SELECT * FROM blocked_apps")
-    fun getBlockedApps(): List<BlockedAppEntity>
+    fun observeBlockedApps(): Flow<List<BlockedAppEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addBlockedApp(blockedApp: BlockedAppEntity): Int // returns rowId
+    suspend fun addBlockedApp(blockedApp: BlockedAppEntity)
 
     @Query("DELETE FROM blocked_apps WHERE packageName = :packageName")
-    fun removeBlockedApp(packageName: String): Int // returns rowId
+    suspend fun removeBlockedApp(packageName: String)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM blocked_apps WHERE packageName = :packageName)")
+    suspend fun isBlocked(packageName: String): Boolean
 }

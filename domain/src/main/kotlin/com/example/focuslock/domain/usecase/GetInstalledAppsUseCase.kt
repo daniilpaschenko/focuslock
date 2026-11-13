@@ -9,5 +9,5 @@ import com.example.focuslock.domain.repository.InstalledAppsRepository
 class GetInstalledAppsUseCase(
     private val installedAppsRepository: InstalledAppsRepository,
 ) {
-    fun getInstalledApps(): List<App> = installedAppsRepository.getInstalledApps()
+    suspend fun getInstalledApps(): List<App> = installedAppsRepository.getInstalledApps()
 }

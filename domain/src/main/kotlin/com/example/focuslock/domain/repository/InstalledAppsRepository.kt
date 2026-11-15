@@ -8,5 +8,5 @@ import com.example.focuslock.domain.model.App
 
 interface InstalledAppsRepository {
 
-    fun getInstalledApps(): List<App>
+    suspend fun getInstalledApps(): List<App>
 }

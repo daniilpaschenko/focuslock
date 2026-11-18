@@ -2,7 +2,12 @@ package com.example.focuslock.feature.apps
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Android
@@ -12,13 +17,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.example.focuslock.domain.model.App
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun AppRow(
@@ -29,26 +39,28 @@ fun AppRow(
 ) {
     val context = LocalContext.current
 
-    // gets app icon with package manager
-    val icon = runCatching {
-        context.packageManager.getApplicationIcon(app.packageName)
-            .toBitmap()
-            .asImageBitmap()
-    }.getOrNull()
+    val icon by produceState<ImageBitmap?>(initialValue = null, key1 = app.packageName) {
+        value = withContext(Dispatchers.IO) {
+            runCatching {
+                context.packageManager
+                    .getApplicationIcon(app.packageName)
+                    .toBitmap()
+                    .asImageBitmap()
+            }.getOrNull()
+        }
+    }
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .clickable {
-                onSelectionChanged(!isSelected)
-            }
+            .clickable { onSelectionChanged(!isSelected) }
             .padding(vertical = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-
-        if (icon != null) {
+        val loadedIcon = icon
+        if (loadedIcon != null) {
             Image(
-                bitmap = icon,
+                bitmap = loadedIcon,
                 contentDescription = null,
                 modifier = Modifier.size(44.dp)
             )
@@ -66,7 +78,6 @@ fun AppRow(
                 )
             }
         }
-
 
         Spacer(modifier = Modifier.width(14.dp))
 

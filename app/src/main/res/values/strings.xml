@@ -1,3 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">focuslock</string>
+    <string name="app_name">FocusLock</string>
+    <!-- Apps screen -->
+    <string name="apps_title">Choose apps</string>
+    <string name="apps_search_placeholder">Search for apps</string>
+    <string name="apps_search_icon_description">Search</string>
+    <string name="apps_blocked_header">Blocked (%1$d)</string>
+    <string name="apps_blocked_hint">Select the apps you want to block from the list below</string>
+    <string name="apps_allowed_header">Allowed</string>
+    <string name="apps_no_results">No apps found</string>
+    <string name="apps_all_blocked">All apps are blocked</string>
+    <string name="apps_empty">No installed apps found</string>
+    <string name="apps_error">Couldn\'t load apps</string>
+    <string name="apps_retry">Retry</string>
 </resources>

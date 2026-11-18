@@ -18,4 +18,6 @@ kotlin {
 
 dependencies {
     testImplementation(libs.junit)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.javax.inject)
 }

@@ -56,6 +56,7 @@ dependencies {
 
     // Navigation
     implementation(libs.navigation.compose)
+    implementation(libs.hilt.navigation.compose)
 
     // DI (Hilt)
     implementation(libs.hilt.android)

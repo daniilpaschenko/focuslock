@@ -17,9 +17,9 @@ room = "2.8.5"
 workManager = "2.12.0"
 retrofit = "3.0.0"
 okhttp = "5.5.1"
-kotlinxSerialization = "1.12.0"
+kotlinxSerialization = "1.13.0"
 navigationCompose = "2.10.2"
-hiltNavigationCompose = "1.2.0"
+hiltNavigationCompose = "1.4.0"
 mockitoKotlin = "6.4.0"
 turbine = "1.2.1"
 
@@ -41,6 +41,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesCore" }
 
 # Navigation
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }

@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.focuslock.domain.model.App
 import com.example.focuslock.domain.repository.BlockedAppsRepository
-import com.example.focuslock.domain.repository.InstalledAppsRepository
+import com.example.focuslock.domain.usecase.GetInstalledAppsUseCase
+import com.example.focuslock.domain.usecase.ObserveBlockedAppsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AppsViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle, // stored search query
-    private val installedAppsRepository: InstalledAppsRepository,
+    private val getInstalledApps: GetInstalledAppsUseCase,
+    observeBlockedApps: ObserveBlockedAppsUseCase,
     private val blockedAppsRepository: BlockedAppsRepository,
 ) : ViewModel() {
 
@@ -29,7 +31,7 @@ class AppsViewModel @Inject constructor(
     private val searchQuery: StateFlow<String> =
         savedStateHandle.getStateFlow(KEY_QUERY, "")
 
-    private val blockedApps = blockedAppsRepository.observeBlockedApps()
+    private val blockedApps = observeBlockedApps()
         .map { apps -> apps.mapTo(HashSet()) { it.packageName } }
 
     // combines several flows
@@ -94,7 +96,7 @@ class AppsViewModel @Inject constructor(
     private fun loadInstalledApps() {
         // does not block the main thread
         viewModelScope.launch {
-            installedApps.value = runCatching { installedAppsRepository.getInstalledApps() }
+            installedApps.value = runCatching { getInstalledApps() }
         }
     }
 
